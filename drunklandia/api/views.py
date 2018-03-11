@@ -11,6 +11,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
 
+
 class AddressViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -19,6 +20,7 @@ class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.AddressSerializer
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
+
 
 class RestaurantHoursViewSet(viewsets.ModelViewSet):
     """
@@ -29,6 +31,7 @@ class RestaurantHoursViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
 
+
 class SpecialViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -37,6 +40,7 @@ class SpecialViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.SpecialSerializer
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
+
 
 class SpecialHoursViewSet(viewsets.ModelViewSet):
     """
@@ -47,6 +51,7 @@ class SpecialHoursViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
 
+
 class AmenityViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -55,6 +60,7 @@ class AmenityViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.AmenitySerializer
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
+
 
 class RestaurantAmenitiesViewSet(viewsets.ModelViewSet):
     """
@@ -65,6 +71,7 @@ class RestaurantAmenitiesViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
 
+
 class ReviewViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -73,4 +80,3 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ReviewSerializer
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
-
