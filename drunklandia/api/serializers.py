@@ -37,10 +37,11 @@ class AmenitySerializer(serializers.ModelSerializer):
         model = Amenity
         fields = '__all__'
 
-from pprint import pprint
+
 class RestaurantAmenitiesSerializer(serializers.ModelSerializer):
     amenity = serializers.SerializerMethodField()
 
+    # Override to serialize nested many-to-many relation
     def get_amenity(self, obj):
         query_set = Amenity.objects.all().filter(amenity=obj.amenity_id)
         return [AmenitySerializer(m).data for m in query_set]

@@ -20,7 +20,7 @@ from rest_framework import routers
 from drunklandia.api import views
 from rest_framework_swagger.views import get_swagger_view
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 
 router.register(r'restaurant', views.RestaurantViewSet)
 router.register(r'address', views.AddressViewSet)

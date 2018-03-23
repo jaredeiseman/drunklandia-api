@@ -25,7 +25,10 @@ SECRET_KEY = 'gg-0u@3t!)g(fd2t77m7fl%wo#3$4_ha$r9vetet!q)c$i!_bx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
+
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -41,13 +44,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'djoser',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'drunklandia.pagination.CustomPagination',
     'PAGE_SIZE': 100,
     'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
@@ -58,6 +62,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -135,3 +140,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = './static/'
+STATIC_DIRS = ['/Users/jaredeiseman/.virtualenvs/drunklandia/lib/python3.6/site-packages/rest_framework_swagger/static']

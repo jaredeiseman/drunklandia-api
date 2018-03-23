@@ -1,23 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from drunklandia.api import utils
 
-DAY_CHOICES = (
-    (0, 'Sunday'),
-    (1, 'Monday'),
-    (2, 'Tuesday'),
-    (3, 'Wednesday'),
-    (4, 'Thursday'),
-    (5, 'Friday'),
-    (6, 'Saturday'),
-)
-
-RATING_CHOICES = (
-    (1, '1'),
-    (2, '2'),
-    (3, '3'),
-    (4, '4'),
-    (5, '5'),
-)
 
 class Restaurant(models.Model):
     """
@@ -46,8 +30,8 @@ class Address(models.Model):
     city = models.CharField(max_length=255, blank=False, null=False)
     state = models.CharField(max_length=2, blank=False, null=False)
     zip_code = models.DecimalField(decimal_places=0, max_digits=5, null=False, blank=False)
-    lat = models.DecimalField(decimal_places=0, max_digits=32, null=False, blank=False)
-    lng = models.DecimalField(decimal_places=0, max_digits=32, null=False, blank=False)
+    lat = models.DecimalField(decimal_places=10, max_digits=32, null=False, blank=False)
+    lng = models.DecimalField(decimal_places=10, max_digits=32, null=False, blank=False)
     restaurant_id = models.OneToOneField(Restaurant, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
@@ -64,7 +48,7 @@ class RestaurantHours(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, models.DO_NOTHING, null=True, blank=True)
     restaurant_id = models.ForeignKey(Restaurant, models.DO_NOTHING, null=False, blank=False, related_name='restaurant_hours')
-    day = models.IntegerField(choices=DAY_CHOICES, null=False, blank=False)
+    day = models.IntegerField(choices=utils.DAY_CHOICES, null=False, blank=False)
     open_time = models.TimeField(blank=False, null=False)
     close_time = models.TimeField(blank=False, null=False)
 
@@ -96,7 +80,7 @@ class SpecialHours(models.Model):
     special_id = models.ForeignKey(Special, models.DO_NOTHING, null=False, blank=False, related_name='special_hours')
     start_time = models.TimeField(blank=False, null=False)
     stop_time = models.TimeField(blank=False, null=False)
-    day = models.IntegerField(choices=DAY_CHOICES, null=False, blank=False)
+    day = models.IntegerField(choices=utils.DAY_CHOICES, null=False, blank=False)
 
     class Meta:
         db_table = 'SpecialHours'
@@ -136,7 +120,7 @@ class Review(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, models.DO_NOTHING, null=True, blank=True)
     restaurant_id = models.ForeignKey(Restaurant, models.DO_NOTHING, null=False, blank=False, related_name='restaurant_reviews')
-    rating = models.IntegerField(null=False, blank=False, choices=RATING_CHOICES)
+    rating = models.IntegerField(null=False, blank=False, choices=utils.RATING_CHOICES)
     review = models.TextField(max_length=500, null=False, blank=False)
 
     class Meta:

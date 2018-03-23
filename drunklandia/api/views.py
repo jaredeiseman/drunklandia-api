@@ -1,20 +1,22 @@
 from rest_framework import viewsets, filters
 from drunklandia.api import serializers, models
+from drunklandia import permissions
 
 
 class RestaurantViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint for Restaurant object
     """
     queryset = models.Restaurant.objects.all()
     serializer_class = serializers.RestaurantSerializer
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
+    permission_classes = (permissions.IsOwnerOrReadOnly,)
 
 
 class AddressViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint for Address object
     """
     queryset = models.Address.objects.all()
     serializer_class = serializers.AddressSerializer
@@ -24,7 +26,7 @@ class AddressViewSet(viewsets.ModelViewSet):
 
 class RestaurantHoursViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint for RestaurantHours object
     """
     queryset = models.RestaurantHours.objects.all()
     serializer_class = serializers.RestaurantHoursSerializer
@@ -34,7 +36,7 @@ class RestaurantHoursViewSet(viewsets.ModelViewSet):
 
 class SpecialViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint for Special object
     """
     queryset = models.Special.objects.all()
     serializer_class = serializers.SpecialSerializer
@@ -44,7 +46,7 @@ class SpecialViewSet(viewsets.ModelViewSet):
 
 class SpecialHoursViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint for SpecialHours object
     """
     queryset = models.SpecialHours.objects.all()
     serializer_class = serializers.SpecialHoursSerializer
@@ -54,7 +56,7 @@ class SpecialHoursViewSet(viewsets.ModelViewSet):
 
 class AmenityViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint for Amenity object
     """
     queryset = models.Amenity.objects.all()
     serializer_class = serializers.AmenitySerializer
@@ -64,7 +66,7 @@ class AmenityViewSet(viewsets.ModelViewSet):
 
 class RestaurantAmenitiesViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint for RestaurantAmenities union object
     """
     queryset = models.RestaurantAmenities.objects.all()
     serializer_class = serializers.RestaurantAmenitiesSerializer
@@ -74,7 +76,7 @@ class RestaurantAmenitiesViewSet(viewsets.ModelViewSet):
 
 class ReviewViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint for Review object
     """
     queryset = models.Review.objects.all()
     serializer_class = serializers.ReviewSerializer
