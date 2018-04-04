@@ -28,7 +28,7 @@ DEBUG = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
 
-ALLOWED_HOSTS = ['localhost', 'drunklandia-api-dev.us-west-2.elasticbeanstalk.com', 'drunklandia.com']
+ALLOWED_HOSTS = ['localhost', 'drunklandia-api-dev.us-west-2.elasticbeanstalk.com', '.drunklandia.com']
 
 
 # Application definition
