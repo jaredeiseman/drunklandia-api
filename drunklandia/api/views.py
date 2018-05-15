@@ -11,17 +11,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.RestaurantSerializer
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
-    permission_classes = (permissions.IsOwnerOrReadOnly,)
-
-
-class AddressViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint for Address object
-    """
-    queryset = models.Address.objects.all()
-    serializer_class = serializers.AddressSerializer
-    filter_backends = (filters.OrderingFilter,)
-    ordering_fields = '__all__'
+    # permission_classes = (permissions.IsOwnerOrReadOnly,)
 
 
 class RestaurantHoursViewSet(viewsets.ModelViewSet):
@@ -73,12 +63,3 @@ class RestaurantAmenitiesViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.OrderingFilter,)
     ordering_fields = '__all__'
 
-
-class ReviewViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint for Review object
-    """
-    queryset = models.Review.objects.all()
-    serializer_class = serializers.ReviewSerializer
-    filter_backends = (filters.OrderingFilter,)
-    ordering_fields = '__all__'

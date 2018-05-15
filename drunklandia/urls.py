@@ -23,13 +23,11 @@ from rest_framework_swagger.views import get_swagger_view
 router = routers.DefaultRouter(trailing_slash=False)
 
 router.register(r'restaurant', views.RestaurantViewSet)
-router.register(r'address', views.AddressViewSet)
 router.register(r'restaurant_hours', views.RestaurantHoursViewSet)
 router.register(r'specials', views.SpecialViewSet)
 router.register(r'special_hours', views.SpecialHoursViewSet)
 router.register(r'amenities', views.AmenityViewSet)
 router.register(r'restaurant_amenities', views.RestaurantAmenitiesViewSet)
-router.register(r'reviews', views.ReviewViewSet)
 
 schema_view = get_swagger_view(title='Drunklandia API')
 

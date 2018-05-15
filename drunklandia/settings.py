@@ -51,7 +51,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'drunklandia.pagination.CustomPagination',
     'PAGE_SIZE': 100,
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
