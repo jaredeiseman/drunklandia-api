@@ -8,8 +8,8 @@ After cloning the repo, and activating your virtual environment, run "pip instal
 
 You will then need to run the following commands from your terminal in the root directory of the project:
 
-python manage.py makemigrations
-python manage.py migrate
+python manage.py makemigrations<br/>
+python manage.py migrate<br/>
 python manage.py createsuperuser
 
 Finally, you can run the server with "python manage.py runserver".
