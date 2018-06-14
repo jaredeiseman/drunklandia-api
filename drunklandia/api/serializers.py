@@ -21,17 +21,16 @@ class SpecialSerializer(serializers.ModelSerializer):
 
 
 class AmenitySerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Amenity
         fields = '__all__'
 
 
 class RestaurantAmenitiesSerializer(serializers.ModelSerializer):
-    amenity_details = AmenitySerializer()
+    amenity_id = AmenitySerializer(many=False)
     class Meta:
         model = RestaurantAmenities
-        fields = ('restaurant_id', 'amenity_details',)
+        fields = ('restaurant_id', 'amenity_id',)
         # depth = 1 # TODO: this isnt right... need to do depth 1 on only the amenities
 
 
@@ -39,3 +38,17 @@ class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
         fields = '__all__'
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'date_joined', 'last_login', 'profile',)
+        depth = 1

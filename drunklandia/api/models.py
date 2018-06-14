@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from drunklandia.api import utils
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Restaurant(models.Model):
@@ -93,8 +95,29 @@ class RestaurantAmenities(models.Model):
     RestaurantAmenity: id, restaurant_id, amenity_id
     """
     restaurant_id = models.ForeignKey(Restaurant, models.DO_NOTHING, null=False, blank=False)
-    amenity_id = models.ForeignKey(Amenity, models.DO_NOTHING, null=False, blank=False, related_name='amenity_details')
+    amenity_id = models.ForeignKey(Amenity, models.DO_NOTHING, null=False, blank=False)
     
     class Meta:
         db_table = 'RestaurantAmenities'
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    favorites = models.CharField(max_length=255)
+
+    def set_favorites(self, x):
+        self.favorites = json.dumps(x)
+
+    def get_favorites(self, x):
+        return json.loads(self.favorites)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

@@ -28,6 +28,7 @@ router.register(r'specials', views.SpecialViewSet)
 router.register(r'special_hours', views.SpecialHoursViewSet)
 router.register(r'amenities', views.AmenityViewSet)
 router.register(r'restaurant_amenities', views.RestaurantAmenitiesViewSet)
+router.register(r'user_profile', views.ProflieViewSet)
 
 schema_view = get_swagger_view(title='Drunklandia API')
 
@@ -39,4 +40,5 @@ urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
     url(r'^api/v1/auth/', include('djoser.urls')),
     url(r'^api/v1/auth/', include('djoser.urls.jwt')),
+    url(r'^api/v1/my_favorites/', views.Favorites.as_view(), name='favorites')
 ]

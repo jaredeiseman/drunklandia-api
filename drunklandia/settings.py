@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'djoser',
     'corsheaders',
+    'django_filters',
 ]
 
 REST_FRAMEWORK = {
@@ -53,11 +54,19 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         # 'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+}
+
+DJOSER = {
+    'SERIALIZERS': {
+        'create_user': 'drunklandia.api.serializers.UserSerializer',
+        'user': 'drunklandia.api.serializers.UserSerializer',
+    }
 }
 
 MIDDLEWARE = [

@@ -1,6 +1,10 @@
 from rest_framework import viewsets, filters
+from rest_framework.views import APIView
 from drunklandia.api import serializers, models
 from drunklandia import permissions
+import django_filters.rest_framework
+from rest_framework.response import Response
+from rest_framework_jwt.utils import jwt_decode_handler
 
 
 class RestaurantViewSet(viewsets.ModelViewSet):
@@ -60,6 +64,33 @@ class RestaurantAmenitiesViewSet(viewsets.ModelViewSet):
     """
     queryset = models.RestaurantAmenities.objects.all()
     serializer_class = serializers.RestaurantAmenitiesSerializer
-    filter_backends = (filters.OrderingFilter,)
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('restaurant_id',)
     ordering_fields = '__all__'
 
+
+class ProflieViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for Profile object
+    """
+    queryset = models.Profile.objects.all()
+    serializer_class = serializers.ProfileSerializer
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('user',)
+    ordering_fields = '__all__'
+
+class Favorites(APIView):
+    def get(self, request, format=None):
+        token = request.META['HTTP_AUTHORIZATION'][4:]
+        user_id = jwt_decode_handler(token)['user_id']
+        profile = models.Profile.objects.get(user=user_id)
+        return Response(profile.favorites)
+
+    def patch(self, request, format=None):
+        token = request.META['HTTP_AUTHORIZATION'][4:]
+        user_id = jwt_decode_handler(token)['user_id']
+        profile = models.Profile.objects.get(user=user_id)
+        profile.favorites = request.data['favorites']
+        profile.save()
+        return Response(profile.favorites)
+    
